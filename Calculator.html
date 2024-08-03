@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="F:\Abhay\Random Stuff\Scripts\Free tools website\Assets\Calculator-Logo.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .logo {
+            font-size: 2.5rem;
+            color: #ff6347;
+            margin-bottom: 20px;
+        }
+        .calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+        .mode-buttons {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .mode-button {
+            background-color: #ff6347;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .mode-button:hover {
+            background-color: #e55347;
+        }
+        .display {
+            background-color: #eaeaea;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            width: calc(100% - 30px);
+            box-sizing: border-box;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            background-color: #ff6347;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #e55347;
+        }
+        .button.operator {
+            background-color: #333;
+        }
+        .button.operator:hover {
+            background-color: #222;
+        }
+        .advanced {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="mode-buttons">
+            <button class="mode-button" onclick="setMode('simple')">Simple</button>
+            <button class="mode-button" onclick="setMode('advanced')">Advanced</button>
+        </div>
+
+        <input type="text" class="display" id="display" readonly />
+
+        <div class="buttons simple" id="simple-buttons">
+            <button class="button" onclick="clearDisplay()">C</button>
+            <button class="button" onclick="appendToDisplay('(')">(</button>
+            <button class="button" onclick="appendToDisplay(')')">)</button>
+            <button class="button operator" onclick="appendToDisplay('/')">/</button>
+
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button operator" onclick="appendToDisplay('*')">*</button>
+
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button operator" onclick="appendToDisplay('-')">-</button>
+
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button operator" onclick="appendToDisplay('+')">+</button>
+
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="button" onclick="appendToDisplay('.')">.</button>
+            <button class="button" onclick="calculateResult()">=</button>
+        </div>
+
+        <div class="buttons advanced" id="advanced-buttons">
+            <button class="button" onclick="clearDisplay()">C</button>
+            <button class="button" onclick="appendToDisplay('(')">(</button>
+            <button class="button" onclick="appendToDisplay(')')">)</button>
+            <button class="button operator" onclick="appendToDisplay('/')">/</button>
+
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button operator" onclick="appendToDisplay('*')">*</button>
+
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button operator" onclick="appendToDisplay('-')">-</button>
+
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button operator" onclick="appendToDisplay('+')">+</button>
+
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="button" onclick="appendToDisplay('.')">.</button>
+            <button class="button" onclick="calculateResult()">=</button>
+
+            <!-- Advanced buttons -->
+            <button class="button operator" onclick="appendToDisplay('Math.sin(')">sin</button>
+            <button class="button operator" onclick="appendToDisplay('Math.cos(')">cos</button>
+            <button class="button operator" onclick="appendToDisplay('Math.tan(')">tan</button>
+            <button class="button operator" onclick="appendToDisplay('Math.log10(')">log</button>
+
+            <button class="button operator" onclick="appendToDisplay('Math.sqrt(')">√</button>
+            <button class="button operator" onclick="appendToDisplay('Math.pow(')">^</button>
+            <button class="button operator" onclick="appendToDisplay('Math.PI')">π</button>
+            <button class="button operator" onclick="appendToDisplay('Math.E')">e</button>
+        </div>
+    </div>
+
+    <script>
+        const displayElement = document.getElementById('display');
+        const simpleButtons = document.getElementById('simple-buttons');
+        const advancedButtons = document.getElementById('advanced-buttons');
+
+        function clearDisplay() {
+            displayElement.value = '';
+        }
+
+        function appendToDisplay(value) {
+            displayElement.value += value;
+        }
+
+        function calculateResult() {
+            try {
+                displayElement.value = eval(displayElement.value) || '0';
+            } catch (error) {
+                displayElement.value = 'Error';
+            }
+        }
+
+        // Enable typing in the display
+        displayElement.removeAttribute('readonly');
+
+        function setMode(mode) {
+            if (mode === 'simple') {
+                simpleButtons.style.display = 'grid';
+                advancedButtons.style.display = 'none';
+            } else if (mode === 'advanced') {
+                simpleButtons.style.display = 'none';
+                advancedButtons.style.display = 'grid';
+            }
+        }
+
+        // Set default mode to simple
+        setMode('simple');
+    </script>
+</body>
+</html>

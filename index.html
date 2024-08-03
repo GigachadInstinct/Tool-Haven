@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Haven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" href="F:\Abhay\Random Stuff\Scripts\Free tools website\Assets\Home-Logo.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 2.5rem;
+            color: #ff6347;
+        }
+        .title {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+        .category {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ff6347;
+            text-align: center;
+        }
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 20px;
+        }
+        .tool {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none; /* Ensure the link styling does not affect the appearance */
+            color: inherit; /* Use the parent color */
+        }
+        .tool:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .tool i {
+            font-size: 2rem;
+            color: #ff6347;
+            margin-bottom: 10px;
+        }
+        .tool h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><i class="fas fa-tools"></i></div>
+        <div class="title">Tool Haven</div>
+    </header>
+
+    <div class="category">
+        <div class="category-title">Basic Tools</div>
+        <div class="tools">
+            <a href="file:///F:/Abhay/Random%20Stuff/Scripts/Free%20tools%20website/Code/Calculator.html" class="tool" target="_blank">
+                <i class="fas fa-calculator"></i>
+                <h3>Calculator</h3>
+            </a>
+            <a href="file:///F:/Abhay/Random%20Stuff/Scripts/Free%20tools%20website/Code/StopWatch.html" class="tool" target="_blank">
+                <i class="fas fa-stopwatch"></i>
+                <h3>Stop Watch</h3>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

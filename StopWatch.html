@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="F:\Abhay\Random Stuff\Scripts\Free tools website\Assets\StopWatch-Logo.png" type="image/x-icon">
+    <style>
+            body {
+                margin: 0;
+                font-family: 'Roboto', sans-serif;
+                color: #333;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: #f5f5f5;
+                position: relative;
+            }
+            .logo {
+                font-size: 2.5rem;
+                color: #ff6347;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+            }
+            .stopwatch {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 30px; /* Increased padding for more space */
+                width: 500px; /* Increased width */
+                text-align: center;
+                margin-top: 60px; /* Adjusted to fit the logo */
+            }
+            .display {
+                background-color: #eaeaea;
+                border-radius: 5px;
+                padding: 20px; /* Increased padding for larger display */
+                font-size: 2rem; /* Increased font size for larger text */
+                margin-bottom: 20px;
+                width: calc(100% - 30px);
+                box-sizing: border-box;
+            }
+            .buttons {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .button {
+                background-color: #ff6347;
+                border: none;
+                border-radius: 5px;
+                color: #fff;
+                padding: 20px; /* Increased padding for larger buttons */
+                font-size: 1.5rem; /* Increased font size for larger text */
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .button:hover {
+                background-color: #e55347;
+            }
+            .button.operator {
+                background-color: #333;
+            }
+            .button.operator:hover {
+                background-color: #222;
+            }
+        </style>
+</head>
+<body>
+    <div class="stopwatch">
+        <div class="display" id="display">00:00:00:000</div>
+
+        <div class="buttons">
+            <button class="button" onclick="startTimer()">Start</button>
+            <button class="button" onclick="stopTimer()">Stop</button>
+            <button class="button" onclick="resetTimer()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        let timer;
+        let [hours, minutes, seconds, milliseconds] = [0, 0, 0, 0];
+        let running = false;
+
+        function updateDisplay() {
+            const display = document.getElementById('display');
+            display.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${padMilliseconds(milliseconds)}`;
+        }
+
+        function pad(number) {
+            return number < 10 ? `0${number}` : number;
+        }
+
+        function padMilliseconds(number) {
+            if (number < 10) return `00${number}`;
+            if (number < 100) return `0${number}`;
+            return number;
+        }
+
+        function startTimer() {
+            if (running) return;
+            running = true;
+            timer = setInterval(() => {
+                milliseconds += 10;
+                if (milliseconds === 1000) {
+                    milliseconds = 0;
+                    seconds++;
+                    if (seconds === 60) {
+                        seconds = 0;
+                        minutes++;
+                        if (minutes === 60) {
+                            minutes = 0;
+                            hours++;
+                        }
+                    }
+                }
+                updateDisplay();
+            }, 10);
+        }
+
+        function stopTimer() {
+            running = false;
+            clearInterval(timer);
+        }
+
+        function resetTimer() {
+            running = false;
+            clearInterval(timer);
+            [hours, minutes, seconds, milliseconds] = [0, 0, 0, 0];
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
